@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from '../../context';
+import classnames from 'classnames';
 
 class Contact extends Component {
   state = {
@@ -28,19 +29,14 @@ class Contact extends Component {
             <div className="card card-body mb-3">
               <h4>
                 {name}{' '}
-                {showContactInfo ? (
-                  <i
-                    onClick={this.onShowClick}
-                    className="fas fa-sort-up"
-                    style={{ cursor: 'pointer' }}
-                  />
-                ) : (
-                  <i
-                    onClick={this.onShowClick}
-                    className="fas fa-sort-down"
-                    style={{ cursor: 'pointer' }}
-                  />
-                )}
+                <i
+                  onClick={this.onShowClick}
+                  className={classnames('fas', {
+                    'fa-sort-up': showContactInfo,
+                    'fa-sort-down': !showContactInfo
+                  })}
+                  style={{ cursor: 'pointer' }}
+                />
                 <i
                   className="fas fa-times float-right text-danger"
                   style={{ cursor: 'pointer' }}
