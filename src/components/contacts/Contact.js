@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Consumer } from '../../context';
 import classnames from 'classnames';
+import axios from 'axios';
 
 class Contact extends Component {
   state = {
     showContactInfo: false
   };
 
-  onDeleteClick = (id, dispatch) => {
+  onDeleteClick = async (id, dispatch) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+
     dispatch({ type: 'DELETE_CONTACT', payload: id });
   };
 
@@ -38,10 +42,11 @@ class Contact extends Component {
                   style={{ cursor: 'pointer' }}
                 />
                 <i
-                  className="fas fa-times float-right text-danger"
+                  className="fas fa-trash float-right text-danger"
                   style={{ cursor: 'pointer' }}
                   onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 />
+                <Link to={`/contact/edit/${id}`}><i className="fas fa-pencil-alt text-dark float-right mr-3" style={{cursor: 'pointer'}}></i></Link>
               </h4>
               {showContactInfo ? (
                 <ul className="list-group">
