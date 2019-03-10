@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 src/components/contacts/AddContact_ref.js
+
+package-lock.json
